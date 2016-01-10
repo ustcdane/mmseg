@@ -13,4 +13,8 @@ MMSEG simple word segmenter in C++ 11
 
 see main.cpp
 
+Result:</br>
+![mmseg测试 By Daniel](http://img.blog.csdn.net/20160110195458531)
 
+Details:</br>
+http://blog.csdn.net/daniel_ustc/article/details/50488040
