@@ -3,7 +3,7 @@ mmseg
 
 MMSEG simple word segmenter in C++ 11 
 
-  * Based on http://yongsun.me/2013/06/simple-implementation-of-mmseg-with-python/
+  * Based on https://github.com/jdeng/mmseg
   * Data files from mmseg4j https://code.google.com/p/mmseg4j/
   * Compile with:
   * In main.cpp
