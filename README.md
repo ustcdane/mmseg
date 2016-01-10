@@ -11,8 +11,7 @@ MMSEG simple word segmenter in C++ 11
   * g++ -Ofast -march=native -funroll-loops -o mmseg -std=c++11 main.cpp 
   * If use src/Mmseg.h
   * g++ -Ofast -march=native -funroll-loops -o mmseg -std=c++11  main.cpp src/Mmseg.cpp 
-Usage
-===
-	see main.cpp
+
+see main.cpp
 
 
