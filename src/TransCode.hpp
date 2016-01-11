@@ -27,6 +27,19 @@ public:
 #endif
 	return out;
   }
+  
+  //  utf8转 gbk
+    inline static std::string utf8ToGbk(const string& str) { // str UTF-8编码的“中文”字符串
+#if defined(_LIBCPP_BEGIN_NAMESPACE_STD)
+        std::wstring_convert<std::codecvt_utf8<wchar_t>>cvt_utf8;//UTF-8<->Unicode转换器
+        std::wstring_convert<std::codecvt<wchar_t, char, std::mbstate_t>>
+            cvt_ansi(new std::codecvt<wchar_t, char, std::mbstate_t>("CHS"));//GBK<->Unicode转换器
+        std::wstring ws = cvt_utf8.from_bytes(str);//UTF-8转换为Unicode
+        std::string myGBK = cvt_ansi.to_bytes(ws);//Unicode转换为GBK
+        return myGBK;
+#endif
+        return "NULL";
+    }
 };
 
 #endif
