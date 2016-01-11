@@ -3,6 +3,16 @@
 
 #include "util/StringUtil.hpp"
 
+#if defined(_LIBCPP_BEGIN_NAMESPACE_STD)
+    #include <locale>
+    #include <codecvt>// gcc has <codecvt>
+#endif
+
+#if defined _MSC_VER //vs need >= vs2010
+    #include <locale>
+    #include <codecvt>
+#endif
+
 using namespace utilSpace;
 
 class TransCode {
