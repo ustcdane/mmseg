@@ -23,17 +23,25 @@ using namespace utilSpace;
 
 class MMSeg {
 public:
-	MMSeg(){}
-	MMSeg(const std::string& dict, const std::string& char_freqs = "") {
+	MMSeg():is_inited(false){}
+	MMSeg(const std::string& dict, const std::string& char_freqs = ""):is_inited(false)
+	{
 		if(load(dict,char_freqs)==-1) {
 			fprintf(stderr, "MMseg construct failed , dict load error!");
 		}
+	}
+	// 单例
+	static MMSeg& Instance(const std::string& dict, const std::string& char_freqs) {
+		static MMSeg instance;
+		instance.load(dict, char_freqs);
+		return instance;
 	}
 public:
   std::vector<String> segment(const String& s, int depth = 3);
   int load(const std::string& dict, const std::string& char_freqs = "");
 
 private:
+  bool is_inited;
   std::unordered_map<Char, int> char_freqs_;
   Trie dict_;
 

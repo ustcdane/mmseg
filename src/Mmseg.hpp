@@ -24,13 +24,22 @@ using namespace utilSpace;
 
 class MMSeg {
 public:
-	MMSeg(){}
-	MMSeg(const std::string& dict, const std::string& char_freqs = "") {
+	MMSeg():is_inited(false){}
+	MMSeg(const std::string& dict, const std::string& char_freqs = ""):is_inited(false)
+	{
 		if(load(dict,char_freqs)==-1) {
 			fprintf(stderr, "MMseg construct failed , dict load error!");
 		}
 	}
+	// 单例
+	static MMSeg& Instance(const std::string& dict, const std::string& char_freqs) {
+		static MMSeg instance;
+		instance.load(dict, char_freqs);
+		return instance;
+	}
+
 private:
+  bool is_inited;
   std::unordered_map<Char, int> char_freqs_;
   Trie dict_;
 
@@ -124,7 +133,11 @@ public:
   }
 
   int load(const std::string& dict, const std::string& char_freqs = "") {
-    std::ifstream ifs(dict);
+    if (is_inited) {// 已经加载词典
+		//std::cout<<"already load dict!!!\n";
+		return 0;
+	}
+	std::ifstream ifs(dict);
     if (!ifs.is_open()) {
 		fprintf(stderr, "open %s failed!!", dict.c_str());
 		return -1;
@@ -156,7 +169,7 @@ public:
       }
     }
     fin.close();
-
+	is_inited = true;
     std::cout << "Loaded Dict: " << dict_.size() << ", Freq: " << char_freqs_.size() << std::endl;
     return 0;
   }

@@ -19,7 +19,7 @@
 # MIT LICENSE
 =============================================================================*/
 
-#include "src/Mmseg.hpp"
+#include "src/Mmseg.h"
 using namespace mmsegSpace;
 
 int main(int argc, const char *argv[]) {
@@ -27,7 +27,10 @@ int main(int argc, const char *argv[]) {
    * MMSeg mmseg;
   mmseg.load("data/words.dic", "data/chars.dic");//use load method
   */
-  MMSeg mmseg("data/words.dic", "data/chars.dic");
+  // MMSeg mmseg("data/words.dic", "data/chars.dic");
+  MMSeg mmseg = MMSeg::Instance("data/words.dic", "data/chars.dic");
+  // 测试单例
+  MMSeg mmseg2 = MMSeg::Instance("data/words.dic", "data/chars.dic");
 
   if (argc >= 2) {
     std::ifstream ifs(argv[1]);

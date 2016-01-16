@@ -60,7 +60,9 @@ namespace mmsegSpace{
   }
   // 加载字典
   int mmsegSpace::MMSeg::load(const std::string& dict, const std::string& char_freqs) {
-    std::ifstream ifs(dict);
+	if (is_inited) // 已经加载词典
+		return 0;
+	std::ifstream ifs(dict);
     if (!ifs.is_open()) {
 		fprintf(stderr, "open %s failed!!", dict.c_str());
 		return -1;
@@ -94,7 +96,8 @@ namespace mmsegSpace{
     fin.close();
 
     std::cout << "Loaded Dict: " << dict_.size() << ", Freq: " << char_freqs_.size() << std::endl;
-    return 0;
+    is_inited = true;
+	return 0;
   }
 }
 
